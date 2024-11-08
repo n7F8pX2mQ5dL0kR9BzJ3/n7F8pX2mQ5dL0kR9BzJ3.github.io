@@ -50,9 +50,9 @@ jobs:
           echo "</html>" >> ${index}
 
           # Inject style sheet
-          echo "<style>"
+          echo "<style>" >> ${index}
           cat src/style/style.css >> ${index}
-          echo "</style>"
+          echo "</style>" >> ${index}
 
       - name: Коммит и отправка изменений
         uses: EndBug/add-and-commit@v7
