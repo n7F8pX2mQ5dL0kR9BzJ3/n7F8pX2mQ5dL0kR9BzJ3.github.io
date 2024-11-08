@@ -3,7 +3,7 @@ name: Generate Download Page
 on:
   push:
     branches:
-      - main  # Change to your branch name if necessary
+      - main
 
 jobs:
   generate-download-page:
@@ -47,3 +47,4 @@ jobs:
           author_email: 'actions@github.com'
           message: 'Update download page'
           push: true
+          token: ${{ secrets.GITHUB_TOKEN }}
