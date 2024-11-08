@@ -33,7 +33,7 @@ jobs:
               # Convert size to human-readable format
               human_size=$(numfmt --to=iec --suffix=B "$filesize")
 
-              mv "./src/download/${file}" "./docs/d/${file}"
+              mv "${file}" "./docs/d/${file}"
               echo "  <p><a href='download/$filename' download>$filename</a> - $human_size</p>" >> index.html
             fi
           done
