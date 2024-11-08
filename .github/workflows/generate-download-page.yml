@@ -43,6 +43,7 @@ jobs:
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
         with:
-          committer_name: 'GitHub Actions'
-          author_email: '41898282+github-actions[bot]@users.noreply.github.com'
+          author_name: 'GitHub Actions'
+          author_email: 'actions@github.com'
           message: 'Update download page'
+          push: true
