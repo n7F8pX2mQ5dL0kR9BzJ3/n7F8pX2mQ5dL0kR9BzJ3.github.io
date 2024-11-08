@@ -1,4 +1,4 @@
-name: Generate Download Page
+name: Генерация страницы загрузки
 
 on:
   push:
@@ -10,27 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Проверка репозитория
         uses: actions/checkout@v2
 
-      - name: List files in docs/d and generate index.html
+      - name: Список файлов в docs/d и генерация index.html
         run: |
-          # Create the index.html file
           echo "<!DOCTYPE html>" > index.html
-          echo "<html lang='en'>" >> index.html
+          echo "<html lang='ru'>" >> index.html
           echo "<head>" >> index.html
           echo "  <meta charset='UTF-8'>" >> index.html
-          echo "  <title>Download Page</title>" >> index.html
+          echo "  <title>Страница загрузки</title>" >> index.html
           echo "</head>" >> index.html
           echo "<body>" >> index.html
-          echo "  <h1>Download Files</h1>" >> index.html
+          echo "  <h1>Загрузить файлы</h1>" >> index.html
           echo "  <ul>" >> index.html
 
-          # List all files in docs/d/ and create download links
           for file in docs/d/*; do
-            # Check if the file is not a directory
             if [ -f "$file" ]; then
-              # Add a download link for the file
               filename=$(basename "$file")
               echo "    <li><a href='docs/d/$filename' download>$filename</a></li>" >> index.html
             fi
@@ -40,10 +36,10 @@ jobs:
           echo "</body>" >> index.html
           echo "</html>" >> index.html
 
-      - name: Commit and push changes
+      - name: Коммит и отправка изменений
         uses: EndBug/add-and-commit@v7
         with:
           author_name: 'GitHub Actions'
           author_email: 'actions@github.com'
-          message: 'Update download page'
+          message: '.'
           push: true
