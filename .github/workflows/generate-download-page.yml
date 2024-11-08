@@ -37,6 +37,12 @@ jobs:
           done
 
           echo "<hr>" >> index.html
+
+          # Inject external JavaScript from docs/s/s.js
+          echo "<script>" >> index.html
+          cat docs/s/s.js >> index.html
+          echo "</script>" >> index.html
+
           echo "</body>" >> index.html
           echo "</html>" >> index.html
 
