@@ -26,13 +26,15 @@ jobs:
           echo "<hr>" >> index.html
 
           # Loop through files in docs/d/ and create download links with file size
-          for file in docs/d/*; do
+          for file in src/download/*; do
             if [ -f "$file" ]; then
               filename=$(basename "$file")
               filesize=$(stat --format=%s "$file")
               # Convert size to human-readable format
               human_size=$(numfmt --to=iec --suffix=B "$filesize")
-              echo "  <p><a href='docs/d/$filename' download>$filename</a> - $human_size</p>" >> index.html
+
+              mv "./src/download/${file}" "./docs/d/${file}"
+              echo "  <p><a href='download/$filename' download>$filename</a> - $human_size</p>" >> index.html
             fi
           done
 
@@ -40,11 +42,16 @@ jobs:
 
           # Inject external JavaScript from docs/s/s.js
           echo "<script>" >> index.html
-          cat docs/s/s.js >> index.html
+          cat src/script/s.js >> index.html
           echo "</script>" >> index.html
 
           echo "</body>" >> index.html
           echo "</html>" >> index.html
+
+          # Inject style sheet
+          echo "<style>"
+          cat src/style/style.css >> index.html
+          echo "</style>"
 
       - name: Коммит и отправка изменений
         uses: EndBug/add-and-commit@v7
