@@ -22,17 +22,21 @@ jobs:
           echo "  <title>Страница загрузки</title>" >> index.html
           echo "</head>" >> index.html
           echo "<body>" >> index.html
-          echo "  <h1>Загрузить файлы</h1>" >> index.html
-          echo "  <ul>" >> index.html
+          echo "  <h1>Загрузить файлы | Downloads</h1>" >> index.html
+          echo "<hr>" >> index.html
 
+          # Loop through files in docs/d/ and create download links with file size
           for file in docs/d/*; do
             if [ -f "$file" ]; then
               filename=$(basename "$file")
-              echo "    <li><a href='docs/d/$filename' download>$filename</a></li>" >> index.html
+              filesize=$(stat --format=%s "$file")
+              # Convert size to human-readable format
+              human_size=$(numfmt --to=iec --suffix=B "$filesize")
+              echo "  <p><a href='docs/d/$filename' download>$filename</a> - $human_size</p>" >> index.html
             fi
           done
 
-          echo "  </ul>" >> index.html
+          echo "<hr>" >> index.html
           echo "</body>" >> index.html
           echo "</html>" >> index.html
 
@@ -41,5 +45,5 @@ jobs:
         with:
           author_name: 'GitHub Actions'
           author_email: 'actions@github.com'
-          message: '.'
+          message: 'Обновить страницу загрузки'
           push: true
