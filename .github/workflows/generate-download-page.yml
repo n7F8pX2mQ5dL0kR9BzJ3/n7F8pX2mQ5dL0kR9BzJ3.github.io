@@ -47,4 +47,4 @@ jobs:
           author_email: 'actions@github.com'
           message: 'Update download page'
           push: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
