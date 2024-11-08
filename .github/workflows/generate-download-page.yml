@@ -13,17 +13,18 @@ jobs:
       - name: Проверка репозитория
         uses: actions/checkout@v2
 
-      - name: Список файлов в docs/d и генерация index.html
+      - name: Список файлов в docs/d и генерация ${index}
         run: |
-          echo "<!DOCTYPE html>" > index.html
-          echo "<html lang='ru'>" >> index.html
-          echo "<head>" >> index.html
-          echo "  <meta charset='UTF-8'>" >> index.html
-          echo "  <title>Страница загрузки</title>" >> index.html
-          echo "</head>" >> index.html
-          echo "<body>" >> index.html
-          echo "  <h1>Загрузить файлы | Downloads</h1>" >> index.html
-          echo "<hr>" >> index.html
+          index=./docs/index.html
+          echo "<!DOCTYPE html>" > ${index}
+          echo "<html lang='ru'>" >> ${index}
+          echo "<head>" >> ${index}
+          echo "  <meta charset='UTF-8'>" >> ${index}
+          echo "  <title>Страница загрузки</title>" >> ${index}
+          echo "</head>" >> ${index}
+          echo "<body>" >> ${index}
+          echo "  <h1>Загрузить файлы | Downloads</h1>" >> ${index}
+          echo "<hr>" >> ${index}
 
           # Loop through files in docs/d/ and create download links with file size
           for file in src/download/*; do
@@ -34,23 +35,23 @@ jobs:
               human_size=$(numfmt --to=iec --suffix=B "$filesize")
 
               mv "${file}" "./docs/d/$(basename ${file})"
-              echo "  <p><a href='download/$(basename ${filename}' download>$filename</a> - $human_size</p>" >> index.html
+              echo "  <p><a href='download/$(basename ${filename})' download>$filename</a> - $human_size</p>" >> ${index}
             fi
           done
 
-          echo "<hr>" >> index.html
+          echo "<hr>" >> ${index}
 
           # Inject external JavaScript from docs/s/s.js
-          echo "<script>" >> index.html
-          cat src/script/s.js >> index.html
-          echo "</script>" >> index.html
+          echo "<script>" >> ${index}
+          cat src/script/s.js >> ${index}
+          echo "</script>" >> ${index}
 
-          echo "</body>" >> index.html
-          echo "</html>" >> index.html
+          echo "</body>" >> ${index}
+          echo "</html>" >> ${index}
 
           # Inject style sheet
           echo "<style>"
-          cat src/style/style.css >> index.html
+          cat src/style/style.css >> ${index}
           echo "</style>"
 
       - name: Коммит и отправка изменений
