@@ -34,7 +34,7 @@ jobs:
               human_size=$(numfmt --to=iec --suffix=B "$filesize")
 
               mv "${file}" "./docs/d/$(basename ${file})"
-              echo "  <p><a href='download/$filename' download>$filename</a> - $human_size</p>" >> index.html
+              echo "  <p><a href='download/$(basename ${filename}' download>$filename</a> - $human_size</p>" >> index.html
             fi
           done
 
